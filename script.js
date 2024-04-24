@@ -11,6 +11,16 @@ const ASSETS = {
         width: 132,
         height: 192
       },
+      ALIEN2: {
+        src: 'verdinho.gif',
+        width: 132,
+        height: 192
+      },
+      ALIEN3: {
+        src: 'roxinho.gif',
+        width: 132,
+        height: 192
+      },
       METEOR: {
         src: 'meteor.png',
         width: 132,
@@ -39,6 +49,7 @@ const ASSETS = {
       
     AUDIO: {
       theme: 'Dark Ocean - Menu Theme of Divided Space.mp3',
+      game: 'Saturn Drift - Main Theme of Divided Space.mp3',
       engine: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/engine.wav',
       honk: 'buzina-navio.mp3',
       beep: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav'
@@ -178,36 +189,59 @@ const ASSETS = {
   
   }
   
-   class Audio {
-  
-      constructor() {
-  
-          this.audioCtx = new AudioContext()
-  
-      // volume
-      this.destination = this.audioCtx.createGain()
-      this.volume = 1
-          this.destination.connect( this.audioCtx.destination )
-  
-          this.files = {}
-  
-          let _self = this
-          this.load(ASSETS.AUDIO.theme, 'theme', function(key) {
-  
-              let source = _self.audioCtx.createBufferSource()
-              source.buffer = _self.files[key]
-  
-              let gainNode = _self.audioCtx.createGain()
-              gainNode.gain.value = .6
-              source.connect(gainNode)
-              gainNode.connect(_self.destination)
-  
-              source.loop = true
-              source.start(0)
-  
-          })
-  
+  class Audio {
+
+    constructor() {
+      this.audioCtx = new AudioContext();
+      this.destination = this.audioCtx.createGain();
+      this.volume = 1;
+      this.destination.connect(this.audioCtx.destination);
+      this.files = {};
+      this.themeSource = null; // Armazenar a referência ao source do tema
+
+      let _self = this;
+      this.load(ASSETS.AUDIO.theme, 'theme', function(key) {
+          let source = _self.audioCtx.createBufferSource();
+          source.buffer = _self.files[key];
+          _self.themeSource = source; // Armazenar a referência ao source do tema para parar posteriormente
+          
+          let gainNode = _self.audioCtx.createGain();
+          gainNode.gain.value = 0.6;
+          source.connect(gainNode);
+          gainNode.connect(_self.destination);
+          
+          source.loop = true;
+          source.start(0);
+      });
+
+      document.addEventListener('keydown', (event) => {
+          if (event.key === 'c') {
+              // Parar a música do tema se estiver tocando
+              if (_self.themeSource) {
+                  _self.themeSource.stop();
+              }
+              
+              // Iniciar a música do jogo
+              _self.playWithVolume(ASSETS.AUDIO.game, 1, true);
+          }
+      });
+  }
+
+  // Método para parar a música do tema
+  stopTheme() {
+      if (this.themeSource) {
+          this.themeSource.stop();
+          this.themeSource = null; // Limpar a referência ao source do tema
       }
+  }
+
+  // Método para iniciar a música do jogo
+  startGameMusic() {
+      this.playWithVolume(ASSETS.AUDIO.game, 1, true);
+  }
+  
+
+
   
     get volume() {
       return this.destination.gain.value
@@ -216,6 +250,40 @@ const ASSETS = {
     set volume(level) {
       this.destination.gain.value = level
     }
+  
+   
+   
+
+
+
+    playWithVolume(src, volume = 1, loop = false, speed = 0.9) {
+      let _self = this;
+      this.load(src, 'customTrack', function(key) {
+          let source = _self.audioCtx.createBufferSource();
+          source.buffer = _self.files[key];
+          let gainNode = _self.audioCtx.createGain();
+  
+          let adjustedVolume = volume * Math.pow(speed, 0.5);
+          adjustedVolume = Math.min(adjustedVolume, 1);
+  
+          gainNode.gain.value = adjustedVolume;
+  
+          source.connect(gainNode);
+          gainNode.connect(_self.destination);
+          
+          // Define loop como false se a velocidade for menor ou igual a zero
+          source.loop = loop && speed > 0.5;
+  
+          source.playbackRate.value = speed;
+  
+          // Verifica se a velocidade é zero e para a reprodução se for o caso
+          if (speed === 0) {
+              source.stop(0);
+          } else {
+              source.start(0);
+          }
+      });
+  }
   
   
       play(key, pitch) {
@@ -243,6 +311,7 @@ const ASSETS = {
       }
   }
   
+
 
   const highscores = []
   
@@ -442,7 +511,8 @@ const ASSETS = {
     }
   
   
-    if(speed > 0) audio.play('engine', speed * 4)
+    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0.1, true)
+    else audio.playWithVolume(ASSETS.AUDIO.engine, 0, false)
   
     cloud.style.backgroundPosition = `${ (cloudOffset -= lines[startPos].curve * step * speed * .13) | 0}px 0`
   
@@ -483,9 +553,11 @@ const ASSETS = {
       // O que vem depois da '%' é a distância entre cada imagem
 
       if(n % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN, -2)
-      if(n % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, -2)
+      if(n % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN2, -2)
+      if(n % 30 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, -2)
       if((n + 5) % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN, 1.3)
-      if((n + 5) % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, 1.3)
+      if((n + 5) % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN3, 1.3)
+      if((n + 5) % 30 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, 1.3)
       
       if(l.special) l.drawSprite(level, 0, l.special, l.special.offset||0)
   
