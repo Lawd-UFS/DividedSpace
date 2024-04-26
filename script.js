@@ -212,7 +212,7 @@ const ASSETS = {
           source.connect(gainNode);
           gainNode.connect(_self.destination);
           
-          
+          source.loop = true
           source.start(0);
      
       });
@@ -238,6 +238,7 @@ const ASSETS = {
                     source.connect(gainNode);
                     gainNode.connect(_self.destination);
                     
+
                     source.loop = true
                     source.start(0);
                
