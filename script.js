@@ -256,7 +256,7 @@ const ASSETS = {
 
 
 
-    playWithVolume(src, volume = 1, loop = false, speed = 0.9) {
+    playWithVolume(src, volume = 0.1, loop = false, speed = 1) {
       let _self = this;
       this.load(src, 'customTrack', function(key) {
           let source = _self.audioCtx.createBufferSource();
@@ -272,16 +272,11 @@ const ASSETS = {
           gainNode.connect(_self.destination);
           
           // Define loop como false se a velocidade for menor ou igual a zero
-          source.loop = loop && speed > 0.5;
+         
   
-          source.playbackRate.value = speed;
-  
-          // Verifica se a velocidade é zero e para a reprodução se for o caso
-          if (speed === 0) {
-              source.stop(0);
-          } else {
-              source.start(0);
-          }
+         
+          source.start(0);
+          
       });
   }
   
@@ -511,8 +506,8 @@ const ASSETS = {
     }
   
   
-    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0.1, true)
-    else audio.playWithVolume(ASSETS.AUDIO.engine, 0, false)
+    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0.1, true, 0.5)
+    else audio.playWithVolume(ASSETS.AUDIO.engine, 0, false, 0.5)
   
     cloud.style.backgroundPosition = `${ (cloudOffset -= lines[startPos].curve * step * speed * .13) | 0}px 0`
   
