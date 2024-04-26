@@ -216,7 +216,7 @@ const ASSETS = {
           source.start(0);
      
       });
-
+//teste
       let isGameMusicPlaying = false;
 
       document.addEventListener('keydown', (event) => {
