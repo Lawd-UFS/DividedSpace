@@ -39,7 +39,7 @@ const ASSETS = {
         height: 36
       },
       FINISH: {
-        src: 'CCET_PARK-removebg-preview.png',
+        src: 'PortalCCET.png',
         width: 339,
         height: 180,
         offset: -.5
@@ -218,33 +218,28 @@ const ASSETS = {
      
       });
 
+      let isGameMusicPlaying = false;
+
       document.addEventListener('keydown', (event) => {
           if (event.key === 'c') {
-              // Parar a música do tema se estiver tocando
-              if (_self.themeSource) {
-                  _self.themeSource.stop();
+              // Verificar se a música do jogo já está tocando
+              if (!isGameMusicPlaying) {
+                  // Parar a música do tema se estiver tocando
+                  if (_self.themeSource) {
+                      _self.themeSource.stop();
+                  }
+                  
+                  // Iniciar a música do jogo
+                  _self.playWithVolume(ASSETS.AUDIO.game, 1, true);
+      
+                  // Atualizar o estado da música do jogo para indicar que está tocando
+                  isGameMusicPlaying = true;
               }
-              
-              // Iniciar a música do jogo
-              _self.playWithVolume(ASSETS.AUDIO.game, 1, true);
           }
       });
-  }
 
-  // Método para parar a música do tema
-  stopTheme() {
-      if (this.themeSource) {
-          this.themeSource.stop();
-          this.themeSource = null; // Limpar a referência ao source do tema
-      }
-  }
 
-  // Método para iniciar a música do jogo
-  startGameMusic() {
-      this.playWithVolume(ASSETS.AUDIO.game, 1, true);
   }
-  
-
 
   
     get volume() {
@@ -255,12 +250,8 @@ const ASSETS = {
       this.destination.gain.value = level
     }
   
-   
-   
-
-
-
-    playWithVolume(src, volume = 0.1, loop = false, speed = 1) {
+     
+    playWithVolume(src, volume = 0.1, speed = 1) {
       let _self = this;
       this.load(src, 'customTrack', function(key) {
           let source = _self.audioCtx.createBufferSource();
@@ -274,13 +265,12 @@ const ASSETS = {
   
           source.connect(gainNode);
           gainNode.connect(_self.destination);
-          
-          // Define loop como false se a velocidade for menor ou igual a zero
-         
-  
-         
+            
           source.start(0);
-          
+
+          source.onended = function() {
+            _self.playWithVolume(src, volume, speed); // Reiniciar a reprodução
+        };
           
       });
   }
@@ -511,8 +501,8 @@ const ASSETS = {
     }
   
   
-    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0.1, true, 0.5)
-    else audio.playWithVolume(ASSETS.AUDIO.engine, 0, false, 0.5)
+    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0 )
+    else audio.playWithVolume(ASSETS.AUDIO.engine, 0)
   
     cloud.style.backgroundPosition = `${ (cloudOffset -= lines[startPos].curve * step * speed * .13) | 0}px 0`
   
