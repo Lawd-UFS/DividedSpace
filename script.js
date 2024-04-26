@@ -1,3 +1,5 @@
+
+
 const ASSETS = {
   
     COLOR: {
@@ -37,7 +39,7 @@ const ASSETS = {
         height: 36
       },
       FINISH: {
-        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/finish.png',
+        src: 'CCET_PARK-removebg-preview.png',
         width: 339,
         height: 180,
         offset: -.5
@@ -49,13 +51,14 @@ const ASSETS = {
       
     AUDIO: {
       theme: 'Dark Ocean - Menu Theme of Divided Space.mp3',
-      game: 'Saturn Drift - Main Theme of Divided Space.mp3',
+      game: 'Meteor Rush - Main Theme of Divided Space.mp3',
       engine: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/engine.wav',
       honk: 'buzina-navio.mp3',
       beep: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav'
     }
     
   }
+  
   
 
   Number.prototype.pad = function(numZeros, char = 0) {
@@ -212,6 +215,7 @@ const ASSETS = {
           
           source.loop = true;
           source.start(0);
+     
       });
 
       document.addEventListener('keydown', (event) => {
@@ -277,6 +281,7 @@ const ASSETS = {
          
           source.start(0);
           
+          
       });
   }
   
@@ -310,9 +315,9 @@ const ASSETS = {
 
   const highscores = []
   
-  const width = 800
+  const width = 1200
   const halfWidth = width / 2
-  const height = 500
+  const height = 700
   const roadW = 4000
   const segL = 200
   const camD = 0.2
