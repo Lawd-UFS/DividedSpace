@@ -53,7 +53,6 @@ const ASSETS = {
       theme: 'Dark Ocean - Menu Theme of Divided Space.mp3',
       game: 'Meteor Rush - Main Theme of Divided Space.mp3',
       engine: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/engine.wav',
-      honk: 'buzina-navio.mp3',
       beep: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav'
     }
     
@@ -213,7 +212,7 @@ const ASSETS = {
           source.connect(gainNode);
           gainNode.connect(_self.destination);
           
-          source.loop = true;
+          
           source.start(0);
      
       });
@@ -229,15 +228,26 @@ const ASSETS = {
                       _self.themeSource.stop();
                   }
                   
-                  // Iniciar a música do jogo
-                  _self.playWithVolume(ASSETS.AUDIO.game, 1, true);
+                  this.load(ASSETS.AUDIO.game, 'game', function(key) {
+                    let source = _self.audioCtx.createBufferSource();
+                    source.buffer = _self.files[key];
+                    _self.themeSource = source; // Armazenar a referência ao source do tema para parar posteriormente
+                    
+                    let gainNode = _self.audioCtx.createGain();
+                    gainNode.gain.value = 0.6;
+                    source.connect(gainNode);
+                    gainNode.connect(_self.destination);
+                    
+                    source.loop = true
+                    source.start(0);
+               
+                });
       
                   // Atualizar o estado da música do jogo para indicar que está tocando
                   isGameMusicPlaying = true;
               }
           }
       });
-
 
   }
 
@@ -251,7 +261,7 @@ const ASSETS = {
     }
   
      
-    playWithVolume(src, volume = 0.1, speed = 1) {
+    playWithVolume(src, volume = 1, speed = 1) {
       let _self = this;
       this.load(src, 'customTrack', function(key) {
           let source = _self.audioCtx.createBufferSource();
@@ -266,12 +276,11 @@ const ASSETS = {
           source.connect(gainNode);
           gainNode.connect(_self.destination);
             
-          source.start(0);
-
-          source.onended = function() {
-            _self.playWithVolume(src, volume, speed); // Reiniciar a reprodução
-        };
-          
+           // Configurar loop
+    
+              
+     
+                    
       });
   }
   
@@ -501,8 +510,8 @@ const ASSETS = {
     }
   
   
-    if(speed > 0) audio.playWithVolume(ASSETS.AUDIO.engine, 0 )
-    else audio.playWithVolume(ASSETS.AUDIO.engine, 0)
+    
+  
   
     cloud.style.backgroundPosition = `${ (cloudOffset -= lines[startPos].curve * step * speed * .13) | 0}px 0`
   
@@ -519,7 +528,7 @@ const ASSETS = {
       const offsetRatio = 5
       if((car.pos|0) === startPos && isCollide(playerX * offsetRatio + LANE.B, .5, car.lane, .5)) {
         speed = Math.min(hitSpeed, speed)
-        if(inGame) audio.play('honk')
+        
       }
   
     }
