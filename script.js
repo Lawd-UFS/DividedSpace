@@ -1,5 +1,3 @@
-
-
 const ASSETS = {
   
     COLOR: {
@@ -194,6 +192,7 @@ const ASSETS = {
   class Audio {
 
     constructor() {
+      
       this.audioCtx = new AudioContext();
       this.destination = this.audioCtx.createGain();
       this.volume = 1;
@@ -201,21 +200,27 @@ const ASSETS = {
       this.files = {};
       this.themeSource = null; // Armazenar a referência ao source do tema
 
+      
       let _self = this;
-      this.load(ASSETS.AUDIO.theme, 'theme', function(key) {
-          let source = _self.audioCtx.createBufferSource();
-          source.buffer = _self.files[key];
-          _self.themeSource = source; // Armazenar a referência ao source do tema para parar posteriormente
-          
-          let gainNode = _self.audioCtx.createGain();
-          gainNode.gain.value = 0.6;
-          source.connect(gainNode);
-          gainNode.connect(_self.destination);
-          
-          source.loop = true
-          source.start(0);
-     
-      });
+      document.body.addEventListener('click', function() {
+        // Verificar se a música do tema já está tocando
+        if (!_self.themeSource) {
+            // Carregar e reproduzir a música do tema
+            _self.load(ASSETS.AUDIO.theme, 'theme', function(key) {
+                let source = _self.audioCtx.createBufferSource();
+                source.buffer = _self.files[key];
+                _self.themeSource = source; // Armazenar a referência ao source do tema para parar posteriormente
+                
+                let gainNode = _self.audioCtx.createGain();
+                gainNode.gain.value = 0.6;
+                source.connect(gainNode);
+                gainNode.connect(_self.destination);
+                
+                source.loop = true;
+                source.start(0);
+            });
+        }
+    });
 //teste
       let isGameMusicPlaying = false;
 
@@ -261,29 +266,7 @@ const ASSETS = {
       this.destination.gain.value = level
     }
   
-     
-    playWithVolume(src, volume = 1, speed = 1) {
-      let _self = this;
-      this.load(src, 'customTrack', function(key) {
-          let source = _self.audioCtx.createBufferSource();
-          source.buffer = _self.files[key];
-          let gainNode = _self.audioCtx.createGain();
   
-          let adjustedVolume = volume * Math.pow(speed, 0.5);
-          adjustedVolume = Math.min(adjustedVolume, 1);
-  
-          gainNode.gain.value = adjustedVolume;
-  
-          source.connect(gainNode);
-          gainNode.connect(_self.destination);
-            
-           // Configurar loop
-    
-              
-     
-                    
-      });
-  }
   
   
       play(key, pitch) {
