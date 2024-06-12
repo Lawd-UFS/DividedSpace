@@ -1,3 +1,4 @@
+
 body {
     background: #222;
     font-family: 'Press Start 2P', monospace;
@@ -126,7 +127,7 @@ body {
     z-index: 1000;
   }
   
-  #home h1 {
+  #home h1, h2 {
     margin-top: 60px;
   }
 
@@ -199,3 +200,99 @@ body {
   #controls>span:last-child>span {
     transform: rotate(90deg);
   }
+
+  
+  /* TELA INICIAL */
+
+#story {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background: url("https://img.freepik.com/free-photo/galactic-night-sky-astronomy-science-combined-generative-ai_188544-9656.jpg");
+  background-size: auto 100%;
+  user-select: none;
+  transition: opacity 10s;
+  width: 1200px;
+  height: 700px;
+}
+
+#nomeUsuario {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  width: 15%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  z-index: 2000;
+}
+
+#nomeUsuario::placeholder{
+  font-size: 1em;
+  color: #d9bbf3;
+  text-shadow: none;
+}
+
+#botaoInicial {
+  position: absolute;
+  left: 58%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  z-index: 2000;
+}
+
+#loadButton {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  z-index: 2000;
+}
+
+#output {
+  position: absolute;
+  left: 58%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  z-index: 2000;
+}
+
+#botaoProsseguir {
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  z-index: 2000;
+  text-decoration: none;
+  font-size: xx-large;
+
+}
+
+#botaoProsseguir:hover {
+  font-size: 50px;
+}
+
+h2 {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ceb1db;
+}
+
