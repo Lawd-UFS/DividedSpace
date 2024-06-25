@@ -8,25 +8,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
     saveButton.addEventListener('click', () => {
         const inputValue = inputField.value;
         localStorage.setItem('botaoInicial', inputValue);
-        alert('Viajante Registrado!.');
+        inputField.value = '';
+        alert('Viajante Registrado!');
     });
 
-    // Load the input value from local storage
-    loadButton.addEventListener('click', () => {
-        const savedInput = localStorage.getItem('botaoInicial');
-        if (savedInput) {
-            output.textContent = `Saved value: ${savedInput}`;
-        } else {
-            output.textContent = 'No value saved in local storage.';
-        }
-    });
-
-    // Optional: Load the saved value into the input field on page load
-    const savedInput = localStorage.getItem('botaoInicial');
-    if (savedInput) {
-        inputField.value = savedInput;
-    }
 });
+
+//highscoreMenu
+
+const leadboardButton = document.getElementById('leadboard')
+const areaHighscore = document.querySelector('#areaHigh')
+
+areaHighscore.style.display = "none";
+
+var highscores = [];
+
+for(let i = 0; i < 10; i++) {
+  var element = document.createElement('p')
+  highscoreMenu.appendChild(element)
+}
+
+function updateHighscore() {
+  let hN = Math.min(10, highscores.length)
+  for(let i = 0; i < hN; i++) {
+    highscoreMenu.children[i].innerHTML = `${(i+1)}. ${highscores[i]}`
+  }
+}
+
+
+leadboardButton.addEventListener('click', () => {
+  if(localStorage.savedHighscores){
+    highscores = JSON.parse(localStorage.getItem('savedHighscores'));
+  }
+  if (areaHighscore.style.display === "none") {
+    areaHighscore.style.display = "block";
+  } else {
+    areaHighscore.style.display = "none";
+  }
+
+  updateHighscore() 
+});
+
+
+
 
 
 

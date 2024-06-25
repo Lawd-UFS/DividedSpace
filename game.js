@@ -296,7 +296,7 @@ const ASSETS = {
   }
   
 
-  const highscores = []
+  var highscores = []
   
   const width = 1200
   const halfWidth = width / 2
@@ -477,13 +477,19 @@ const ASSETS = {
       text.innerText = 'Aperte Enter para jogar'
       
       const savedInput = localStorage.getItem('botaoInicial');
-      const volta = lap.innerText
+      const volta = lap.innerText;
       const savedLap = localStorage.setItem('lap', volta);
 
-      const resultado = localStorage.getItem('lap')
+      const resultado = localStorage.getItem('lap');
 
+      if(localStorage.savedHighscores){
+        highscores = JSON.parse(localStorage.getItem('savedHighscores'));
+      }
       highscores.push(resultado +`: ${savedInput}` )  
       highscores.sort()
+
+      localStorage.savedHighscores = JSON.stringify(highscores);
+      
       updateHighscore()
   
       inGame = false
@@ -607,12 +613,36 @@ const ASSETS = {
   }
   
   function updateHighscore() {
-    let hN = Math.min(12, highscores.length)
+    let hN = Math.min(10, highscores.length)
     for(let i = 0; i < hN; i++) {
       highscore.children[i].innerHTML = `${(i+1).pad(2, '&nbsp;')}. ${highscores[i]}`
     }
   }
   
+
+  //Usando o LocalStorage para armazenar o nome do jogador
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const inputField = document.getElementById('nomeUsuario');
+    const saveButton = document.getElementById('botaoInicial');
+    const loadButton = document.getElementById('loadButton');
+    const output = document.getElementById('output');
+
+    // Save the input value to local storage
+    saveButton.addEventListener('click', () => {
+        const inputValue = inputField.value;
+        localStorage.setItem('botaoInicial', inputValue);
+        alert('Viajante Registrado!');
+    });
+
+    // Optional: Load the saved value into the input field on page load
+    const savedInput = localStorage.getItem('botaoInicial');
+    if (savedInput) {
+        inputField.value = savedInput;
+    }
+  });
+
+
+  //Função para dar início ao jogo
   function init() {
   
     game.style.width = width + 'px'
