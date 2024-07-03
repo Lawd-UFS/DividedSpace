@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Pixelada;
+  src: url(./fonts/VCR_OSD_MONO_1.001.ttf);
+}
+
 body {
     background: #222;
     font-family: 'Press Start 2P', monospace;
@@ -186,6 +191,7 @@ body {
   
   #controls>span {
     margin-left: 20px;
+    font-family: 'Pixelada';
   }
   
   #controls>span>span {
@@ -200,6 +206,24 @@ body {
     transform: rotate(90deg);
   }
 
+  #botaoVoltar {
+    position: absolute;
+    left: 12%;
+    top: 91%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    color: #d9bbf3;
+    text-decoration: none;
+    text-shadow: 0 0 black, 0 1px black, 2px 0 black, 0 0 black;
+    z-index: 2000;
+    font-weight: bold;
+    font-family: 'Pixelada';
+    background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
   
   /* TELA INICIAL */
 
@@ -211,8 +235,8 @@ body {
   background-size: auto 100%;
   user-select: none;
   transition: opacity 10s;
-  width:1200px;
-  height: 700px;
+  width:1100px;
+  height: 650px;
 }
 
 #nomeUsuario {
@@ -232,11 +256,11 @@ body {
 }
 
 #nomeUsuario::placeholder{
-  font-size: 1em;
+  font-size: 0.9em;
   color: #d9bbf3;
   text-shadow: none;
   font-weight: bold;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Pixelada';
 }
 
 #botaoInicial {
@@ -249,7 +273,7 @@ body {
   text-shadow: 0 0 black, 0 1px black, 2px 0 black, 0 0 black;
   z-index: 2000;
   font-weight: bold;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Pixelada';
   background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
   border-radius: 10px;
   box-shadow: 10px 10px 22px rgba(79,209,197,.64);
@@ -284,7 +308,7 @@ body {
   min-width: 100px;
   min-height: 30px;
   display: inline-flex;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Pixelada';
   font-size: 22px;
   align-items: center;
   justify-content: center;
@@ -381,7 +405,7 @@ h2 {
 #leadboard {
   font-weight: bold;
   font-size: large;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Pixelada';
   background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
   border-radius: 10px;
   box-shadow: 10px 10px 22px rgba(79,209,197,.64);
@@ -402,6 +426,7 @@ h2 {
   bottom: 0;
   column-count: 3;
   column-fill: auto;
+  font-family: 'Pixelada';
 }
 
 #highscoreMenu p {
@@ -426,4 +451,14 @@ h2 {
   z-index: 2000;
   background-color: gray;
   opacity: 0.8;
+}
+
+#creditos {
+  text-align: center;
+  color: #cb9bde;
+  text-shadow: 3px 3px 2px rgb(112, 8, 112);
+}
+
+#creditos p {
+  font-family: 'Pixelada';
 }
