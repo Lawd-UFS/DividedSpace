@@ -1,263 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 @font-face {
   font-family: Pixelada;
   src: url(./fonts/VCR_OSD_MONO_1.001.ttf);
 }
 
 body {
-    background: #222;
-    font-family: 'Press Start 2P', monospace;
-    font-smooth: never;
-    height: 98vh;
-  }
-  
-  .topUI {
-    position: absolute;
-    z-index: 1000;
-    transform: translate(-50%, 25px);
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    letter-spacing: 2px;
-    color: #fff;
-    font-size: 17px;
-  }
-  
-  .topUI::before {
-    display: inline-block;
-    height: 17px;
-    padding: 1px 2px;
-    line-height: 19px;
-    font-size: 17px;
-    background: #fff;
-    text-shadow: none;
-    font-weight: 900;
-    letter-spacing: 0;
-    border-radius: 6px;
-    margin-right: 30px;
-    border: 2px solid #7dd8c9;
-  }
-  
-  #time {
-    left: 13%;
-    color: #da0eec;
-  }
-  
-  #time::before {
-    content: 'TEMPO';
-    color: #da0eec;
-  }
-  
-  #score {
-    left: 45%;
-  }
-  
-  #score::before {
-    content: 'PONTOS';
-    color: #da0eec;
-  }
-  
-  #lap {
-    left: 88%;
-    width: 45%;
-  }
-  
-  #lap::before {
-    content: 'VOLTA';
-    color: #da0eec;
-  }
-  
-  #tacho {
-    position: absolute;
-    text-align: right;
-    width: 23%;
-    bottom: 5%;
-    z-index: 2000;
-    color: #e62e13;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    letter-spacing: 2px;
-    font-size: 23px;
-  }
-  
-  #tacho::after {
-    content: 'km/h';
-    color: #fab453;
-    font-size: 18px;
-    margin-left: 5px;
-  }
-  
-  #game {
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    background: #222;
-    user-select: none;
-    transition: opacity 10s;
-  }
-  
-  #road {
-    transition: opacity 2s;
-    transition-timing-function: steps(8, end);
-  }
-  
-  #road * {
-    position: absolute;
-    
-  }
-  
-  #hero {
-    background-repeat: no-repeat;
-    background-position: -110px 0;
-    z-index: 2000;
-    transform: scale(1.4)
-  }
-  
-  #cloud {
-    background-size: auto 100%;
-    width: 100%;
-    height: 100%;
-  }
-  
-  
-  #road {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  
-  #home {
-    position: absolute;
-    color: #fff;
-    width: 100%;
-    height: 100%;
-  
-    z-index: 1000;
-  }
-  
-  #home h1, h2 {
-    margin-top: 60px;
-  }
+  background: #222;
+  font-family: 'Press Start 2P', monospace;
+  font-smooth: never;
+  height: 98vh;
+}
 
-  #highscore {
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    bottom: 0;
-    column-count: 3;
-    column-fill: auto;
-  }
-  
-  #highscore * {
-    color: #9e95a8;
-    margin: 0 0 6px 27px;
-  }
-  
-  h1 {
-    position: absolute;
-    left: 50%;
-    top: 25%;
-    transform: translate(-50%, -50%);
-    font-size: 3em;
-  
-    background: -webkit-linear-gradient(#725c6f, #ff00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent
-  }
-  
-  #text {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2em;
-    color: #d9bbf3;
-    text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
-  }
-  
-  .blink {
-    animation: blinker 2s steps(4, end) infinite
-  }
-  
-  @keyframes blinker {
-    50% {
-      opacity: 0
-    }
-  }
-  
-  #controls {
-    color: #868686;
-    font-size: 13px;
-    line-height: 13px;
-    margin: 10px;
-    text-align: center;
-  }
-  
-  #controls>span {
-    margin-left: 20px;
-    font-family: 'Pixelada';
-  }
-  
-  #controls>span>span {
-    border: 2px solid #868686;
-    border-radius: 5px;
-    padding: 7px;
-    margin-right: 10px;
-    display: inline-block;
-  }
-  
-  #controls>span:last-child>span {
-    transform: rotate(90deg);
-  }
+.topUI {
+  position: absolute;
+  z-index: 1000;
+  transform: translate(-50%, 25px);
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  letter-spacing: 2px;
+  color: #fff;
+  font-size: 17px;
+}
 
-  #botaoVoltar {
-    position: absolute;
-    left: 12%;
-    top: 91%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2em;
-    color: #d9bbf3;
-    text-decoration: none;
-    text-shadow: 0 0 black, 0 1px black, 2px 0 black, 0 0 black;
-    z-index: 2000;
-    font-weight: bold;
-    font-family: 'Pixelada';
-    background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
-    border-radius: 10px;
-    padding: 5px;
-    cursor: pointer;
-  }
+.topUI::before {
+  display: inline-block;
+  height: 17px;
+  padding: 1px 2px;
+  line-height: 19px;
+  font-size: 17px;
+  background: #fff;
+  text-shadow: none;
+  font-weight: 900;
+  letter-spacing: 0;
+  border-radius: 6px;
+  margin-right: 30px;
+  border: 2px solid #7dd8c9;
+}
 
-  
-  /* TELA INICIAL */
+#time {
+  left: 13%;
+  color: #da0eec;
+}
+
+#time::before {
+  content: 'TEMPO';
+  color: #da0eec;
+}
+
+#score {
+  left: 45%;
+}
+
+#score::before {
+  content: 'PONTOS';
+  color: #da0eec;
+}
+
+#lap {
+  left: 88%;
+  width: 45%;
+}
+
+#lap::before {
+  content: 'VOLTA';
+  color: #da0eec;
+}
+
+#tacho {
+  position: absolute;
+  text-align: right;
+  width: 23%;
+  bottom: 5%;
+  z-index: 2000;
+  color: #e62e13;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  letter-spacing: 2px;
+  font-size: 23px;
+}
+
+#tacho::after {
+  content: 'km/h';
+  color: #fab453;
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+#game {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #222;
+  user-select: none;
+  transition: opacity 10s;
+}
+
+#road {
+  transition: opacity 2s;
+  transition-timing-function: steps(8, end);
+}
+
+#road * {
+  position: absolute;
+
+}
+
+#hero {
+  background-repeat: no-repeat;
+  background-position: -110px 0;
+  z-index: 2000;
+  transform: scale(1.4)
+}
+
+#cloud {
+  background-size: auto 100%;
+  width: 100%;
+  height: 100%;
+}
+
+
+#road {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#home {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1000;
+}
+
+#home h1,
+h2 {
+  margin-top: 60px;
+}
+
+#highscore {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  bottom: 0;
+  column-count: 3;
+  column-fill: auto;
+}
+
+#highscore * {
+  color: #9e95a8;
+  margin: 0 0 6px 27px;
+}
+
+.nomeJogo {
+  font-family: "Pixelify Sans", sans-serif;
+  font-style: normal;
+  font-size: 45px;
+  color: #fff;
+  text-shadow:2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
+}
+
+#text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #d9bbf3;
+  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+}
+
+.blink {
+  animation: blinker 2s steps(4, end) infinite
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0
+  }
+}
+
+#controls {
+  color: #868686;
+  font-size: 13px;
+  line-height: 13px;
+  margin: 10px;
+  text-align: center;
+}
+
+#controls>span {
+  margin-left: 20px;
+  font-family: 'Pixelada';
+}
+
+#controls>span>span {
+  border: 2px solid #868686;
+  border-radius: 5px;
+  padding: 7px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#controls>span:last-child>span {
+  transform: rotate(90deg);
+}
+
+#botaoVoltar {
+  position: absolute;
+  left: 12%;
+  top: 91%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1em;
+  text-decoration: none;
+  z-index: 2000;
+  font-weight: bold;
+  font-family: 'Pixelada';
+  background: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: #2e063e;
+  box-shadow: 2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
+
+
+
+}
+
+#alinharGame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 23%;
+}
+
+/* TELA INICIAL */
+#alinhar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -25%;
+  padding: 50px
+}
 
 #story {
   position: relative;
   margin: 0 auto;
   overflow: hidden;
-  background: url("menuImg.jpg");
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(101, 52, 119, 1) 80%, rgba(115, 64, 134, 1) 100%);
   background-size: auto 100%;
   user-select: none;
   transition: opacity 10s;
-  width:1100px;
+  width: 1100px;
   height: 650px;
+  display: flex;
 }
 
 #nomeUsuario {
+
   position: absolute;
   left: 45%;
   top: 45%;
-  width: 15%;
+  width: 25%;
   transform: translate(-50%, -50%);
   font-size: 1.2em;
-  color: #d9bbf3;
+  color: #2e063e;
   z-index: 2000;
-  background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
+  background: #ffffff;
+  height: 40px;
   border-radius: 10px;
-  box-shadow: 10px 10px 22px rgba(79,209,197,.64);
   font-weight: bold;
   font-family: 'Nunito', sans-serif;
+  box-shadow: 2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
+
 }
 
-#nomeUsuario::placeholder{
-  font-size: 0.9em;
-  color: #d9bbf3;
+#nomeUsuario::placeholder {
+  font-size: 0.7em;
+  color:  #2e063e;
   text-shadow: none;
   font-weight: bold;
   font-family: 'Pixelada';
@@ -265,20 +285,21 @@ body {
 
 #botaoInicial {
   position: absolute;
-  left: 58%;
+  left: 64%;
   top: 45%;
   transform: translate(-50%, -50%);
-  font-size: 1.2em;
-  color: #d9bbf3;
-  text-shadow: 0 0 black, 0 1px black, 2px 0 black, 0 0 black;
+  font-size: 0.9em;
   z-index: 2000;
   font-weight: bold;
   font-family: 'Pixelada';
-  background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
+  background: white;
   border-radius: 10px;
-  box-shadow: 10px 10px 22px rgba(79,209,197,.64);
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
+  height: 40px;
+  border: none;
+  color: #2e063e;
+  box-shadow: 2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
 }
 
 #loadButton {
@@ -316,35 +337,34 @@ body {
   text-align: center;
   letter-spacing: 1.3px;
   font-weight: 700;
-  background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(4, 109, 98) 100%);
+  background: #fff;
   border: none;
   border-radius: 1000px;
-  box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+  box-shadow: 2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   outline: none;
   padding: 10px;
   left: 46%;
   top: 85%;
-  color: #d9bbf3;
-  text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
+  color: #2c002c;
   z-index: 2000;
   text-decoration: none;
 }
 
 #botaoProsseguir::before {
   content: '';
-    border-radius: 1000px;
-    min-width: calc(120px + 12px);
-    min-height: calc(50px + 12px);
-    border: 4px solid #dacbd6;
-    box-shadow: 0 0 60px rgb(230, 129, 208);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all .3s ease-in-out 0s;
+  border-radius: 1000px;
+  min-width: calc(120px + 12px);
+  min-height: calc(50px + 12px);
+  border: 4px solid #dacbd6;
+  box-shadow: 0 0 60px rgb(230, 129, 208);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
 }
 
 #botaoProsseguir:hover,
@@ -359,7 +379,8 @@ body {
 
 #botaoProsseguir::after {
   content: '';
-  width: 30px; height: 30px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   border: 4px solid #dacbd6;
   position: absolute;
@@ -382,6 +403,7 @@ body {
     height: 30px;
     opacity: 1;
   }
+
   100% {
     width: 300px;
     height: 300px;
@@ -397,21 +419,28 @@ h2 {
   z-index: 2000;
   font-size: x-large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: -webkit-linear-gradient( #695c69, #0b1991);
+  background: -webkit-linear-gradient(#695c69, #0b1991);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent
 }
 
 #leadboard {
-  font-weight: bold;
-  font-size: large;
-  font-family: 'Pixelada';
-  background: linear-gradient(90deg, rgb(230, 129, 208) 0%, rgb(122, 112, 121) 100%);
+  background: transparent;
   border-radius: 10px;
-  box-shadow: 10px 10px 22px rgba(79,209,197,.64);
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   width: 100%;
+  font-family: "Pixelify Sans", sans-serif;
+  height: 35px;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-weight: bold;
+  color: white;
+  font-size: medium;
+  border: none;
+  text-shadow: -2px 0 20px #eed211, 0 2px 8px black, 2px 0 black, 0 -2px black;
+
 }
 
 #leadboard:hover,
@@ -432,8 +461,10 @@ h2 {
 #highscoreMenu p {
   width: 300px;
   font-weight: bolder;
-  font-size: large;
+  font-size: smaller;
   opacity: 1;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  color: #fff;
 }
 
 #comandantes {
@@ -449,7 +480,6 @@ h2 {
   height: 100%;
   border-radius: 10px;
   z-index: 2000;
-  background-color: gray;
   opacity: 0.8;
 }
 
