@@ -150,7 +150,7 @@ const ASSETS = {
     clearSprites() {
       for(let e of this.elements) e.style.background = 'transparent'
     }
-  
+
     drawSprite(depth, layer, sprite, offset) {
   
       let destX = this.X + this.scale * halfWidth * offset
@@ -169,6 +169,28 @@ const ASSETS = {
       obj.style.width = destW + `px`
       obj.style.height = destH + `px`
       obj.style.zIndex = depth
+  
+    }
+  
+    drawSpriteFloat(depth, layer, sprite, offset) {
+  
+      let destX = this.X + this.scale * halfWidth * offset
+      let destY = this.Y + 4
+      let destW = sprite.width * this.W / 265
+      let destH = sprite.height * this.W / 265
+  
+      destX += destW * offset
+      destY += destH * -1
+  
+      let obj = (layer instanceof Element) ? layer : this.elements[layer + 6]
+      obj.style.background = `url('${sprite.src}') no-repeat`
+      obj.style.backgroundSize = `${destW}px ${destH}px`
+      obj.style.left = destX + `px`
+      obj.style.top = destY + `px`
+      obj.style.width = destW + `px`
+      obj.style.height = destH + `px`
+      obj.style.zIndex = depth
+      obj.classList.add('float');
   
     }
   
@@ -547,12 +569,12 @@ const ASSETS = {
 
       // O que vem depois da '%' é a distância entre cada imagem
 
-      if(n % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN, -2)
-      if(n % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN2, -2)
+      if(n % 10 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN, -2)
+      if(n % 20 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN2, -2)
       if(n % 30 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, -2)
-      if((n + 5) % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN, 1.3)
+      if((n + 5) % 10 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN, 1.3)
       if((n + 5) % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN3, 1.3)
-      if((n + 5) % 30 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, 1.3)
+      if((n + 5) % 30 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.METEOR, 1.3)
       
       if(l.special) l.drawSprite(level, 0, l.special, l.special.offset||0)
   
