@@ -64,7 +64,7 @@ botaoProsseguir.addEventListener('click', () => {
   typeLetter(); // Inicia a função de digitação
 });
 
-const text = "Você é um(a) piloto(a) intrépido(a) e aventureiro(a), contratado(a) pela Liga Acadêmica de Desenvolvimento Web para uma missão crucial: atravessar a Fronteira Alienigena e chegar até CCET-Park. Seu objetivo é recuperar um item poderoso, que supostamente contém segredos tecnológicos avançados capazes de revolucionar a guerra interestelar. Você encara esse desafio!?";
+const text = "Você é um(a) piloto(a) intrépido(a) e aventureiro(a), contratado(a) pela Liga Acadêmica de Desenvolvimento Web para uma missão crucial: atravessar a Fronteira Alienígena e chegar ao CCET-Park. Seu objetivo é recuperar um item poderoso, que supostamente contém segredos tecnológicos avançados capazes de revolucionar a guerra interestelar. Você encara esse desafio!?";
 const typingSpeed = 20; // Velocidade de digitação em milissegundos
 let contador = 0; // Índice da letra atual
 

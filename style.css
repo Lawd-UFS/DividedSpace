@@ -216,9 +216,9 @@ h2 {
 
 #botaoVoltar {
   position: relative;
-  display: inline-block;
+  /*display: inline-block;*/
   margin-left: 120px;
-  transform: translate(0%, -75%);
+  /*transform: translate(0%, -75%);*/
   font-size: 1.1em;
   text-decoration: none;
   z-index: 2000;
@@ -230,11 +230,6 @@ h2 {
   cursor: pointer;
   color: #2e063e;
   box-shadow: 2px 0 20px #d64bc4, 0 2px 8px black, 2px 0 black, 0 -2px black;
-}
-
-#infoFooter {
-  display: inline-block;
-  margin-left: 150px;
 }
 
 #alinharGame {
