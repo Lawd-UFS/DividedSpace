@@ -227,7 +227,7 @@ const ASSETS = {
       let _self = this;
       document.body.addEventListener('click', function() {
         // Verificar se a música do tema já está tocando
-        if (!_self.themeSource) {
+        if (!_self.themeSource && !isGameMusicPlaying) {
             // Carregar e reproduzir a música do tema
             _self.load(ASSETS.AUDIO.theme, 'theme', function(key) {
                 let source = _self.audioCtx.createBufferSource();
@@ -381,7 +381,7 @@ const ASSETS = {
   
       map.push(section)
     }
-  
+
     map.push({from: i, to: i + N, curve: _ => 0, height: _ => 0, special: ASSETS.IMAGE.FINISH})
     map.push({from: Infinity})
     return map
@@ -434,8 +434,8 @@ const ASSETS = {
   
     if(e.code === 'Escape') {
       e.preventDefault()
-  
-      reset()
+      
+      solvingBug()
     }
   
   
@@ -632,6 +632,42 @@ const ASSETS = {
     home.style.display = 'block'
     tacho.style.display = 'block'
   
+  }
+
+  function solvingBug() {
+
+    location.reload()
+
+    // console.log(pos)
+    // console.log(mapIndex)
+    // console.log(sectionProg)
+    // inGame = false
+
+    // start = timestamp()
+
+    // playerX = 0
+    // speed = 0
+    // scoreVal = 0
+  
+    // pos = 0
+    // cloudOffset = 0
+    // sectionProg = 0
+    // mapIndex = 0
+
+    // console.log(pos)
+    // console.log(mapIndex)
+    // console.log(sectionProg)
+
+    // for(let line of lines) line.curve = line.y = 0
+  
+    // text.innerText = map.length
+    // text.classList.add('blink')
+  
+    // road.style.opacity = .4
+    // hud.style.display = 'none'
+    // home.style.display = 'block'
+    // tacho.style.display = 'block'
+
   }
   
   function updateHighscore() {
