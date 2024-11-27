@@ -7,49 +7,49 @@ const ASSETS = {
     
     IMAGE: {
       ALIEN: {
-        src: 'bicho-zoiudo.gif',
+        src: 'assets/bicho-zoiudo.gif',
         width: 132,
         height: 192
       },
       ALIEN2: {
-        src: 'verdinho.gif',
+        src: 'assets/verdinho.gif',
         width: 132,
         height: 192
       },
       ALIEN3: {
-        src: 'roxinho.gif',
+        src: 'assets/roxinho.gif',
         width: 132,
         height: 192
       },
       METEOR: {
-        src: 'meteor.png',
+        src: 'assets/meteor.png',
         width: 132,
         height: 192
       },
       HERO: {
-        src: 'nave-teste.png',
+        src: 'assets/nave-teste.png',
         width: 110,
         height: 56
       },
       CAR: {
-        src: 'espaconave.png',
+        src: 'assets/espaconave.png',
         width: 50,
         height: 36
       },
       FINISH: {
-        src: 'PortalCCET.png',
+        src: 'assets/PortalCCET.png',
         width: 339,
         height: 180,
         offset: -.5
       },
       SKY: {
-        src: 'space-pixelator-LAWD3.png',
+        src: 'assets/space-pixelator-LAWD3.png',
       }
     },
       
     AUDIO: {
-      theme: 'Dark Ocean - Menu Theme of Divided Space.mp3',
-      game: 'Meteor Rush - Main Theme of Divided Space.mp3',
+      theme: 'assets/Dark Ocean - Menu Theme of Divided Space.mp3',
+      game: 'assets/Meteor Rush - Main Theme of Divided Space.mp3',
       engine: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/engine.wav',
       beep: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav'
     }

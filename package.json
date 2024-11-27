@@ -1,0 +1,17 @@
+{
+  "name": "dividedspace",
+  "version": "1.0.0",
+  "description": "API para o banco de dados do Divided Space",
+  "main": "game.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [],
+  "author": "LAWD",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
