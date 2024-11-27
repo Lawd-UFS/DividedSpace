@@ -76,16 +76,18 @@ const ASSETS = {
   
 
 
-            
+  //Função para pegar um valor aleatório a partir de parâmetros passados    
   function getRand(min, max) {
       return Math.random() * (max - min) + min | 0;
   }
-  
+
+  //
   function randomProperty(obj) {
       let keys = Object.keys(obj)
       return obj[keys[ keys.length * Math.random() << 0]]
   }
   
+  //
   function drawQuad(element, layer, color, x1, y1, w1, x2, y2, w2) {
     element.style.zIndex = layer
     element.style.background = color
@@ -212,6 +214,7 @@ const ASSETS = {
   
   }
   
+  //Classe para definir as músicas que tocam entre o menu e o início de partida
   class Audio {
 
     constructor() {
@@ -358,6 +361,7 @@ const ASSETS = {
     return i => val
   }
   
+  //Função para gerar o mapa do jogo, tomando valores aleatórios para definir as curvas e ondas no mapa
   function genMap() {
   
     let map = []
@@ -390,6 +394,7 @@ const ASSETS = {
   
   let map = genMap()
   
+  //Interpreta os comandos do teclado para definir as ações no jogo
   addEventListener(`keyup`, function(e){
   
     if(e.code === 'ShiftLeft') {
@@ -441,6 +446,7 @@ const ASSETS = {
   
   })
 
+  //
   function update(step) {
 
     pos += speed
@@ -606,6 +612,7 @@ const ASSETS = {
   
   }
   
+  //Função para resetar os parâmetros e retornar o jogo ao estado inicial
   function reset() {
   
     inGame = false
@@ -634,6 +641,7 @@ const ASSETS = {
   
   }
 
+  //Função que atualiza a página, resetando o jogo, porém mantendo os tempos e nomes de jogadores
   function solvingBug() {
 
     location.reload()
@@ -669,7 +677,7 @@ const ASSETS = {
     // tacho.style.display = 'block'
 
   }
-  
+  //Função que atualiza o placar com os menores tempos de conclusão
   function updateHighscore() {
     let hN = Math.min(10, highscores.length)
     for(let i = 0; i < hN; i++) {
