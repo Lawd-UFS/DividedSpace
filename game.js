@@ -446,21 +446,34 @@ const ASSETS = {
   
   })
 
-  //
+  //Responsável por atualizar o estado do jogo em cada "passo" do ciclo de renderização,
+  //controlando o movimento do jogador, as interações com o ambiente e as colisões. 
   function update(step) {
-
+    
+    //A posição do jogador é incrementada pela velocidade (speed),
+    //ou seja, o jogador se move ao longo da estrada.
     pos += speed
+
+    //Essas linhas garantem que a posição (pos) seja cíclica,
+    //ou seja, ela vai "voltar" ao início após ultrapassar o fim da estrada.
     while (pos >= N * segL) pos -= N * segL
     while (pos < 0) pos += N * segL
-  
+    
+    //São calculadas as posições de início e fim de um segmento da estrada,
+    //com base na posição atual (pos).
     var startPos = (pos / segL)  | 0
     let endPos = (startPos + N - 1) % N
 
+    //A pontuação do jogador aumenta com base na velocidade e no tempo (step).
     scoreVal += speed*step
+    //O tempo restante (contagem regressiva) diminui com o tempo (step).
     countDown -= step
 
+    
+    // Controla a posição do jogador na tela (deslocamento horizontal)
     playerX -= lines[startPos].curve / 5000 * step * speed
-  
+    
+    // Controla a animação de movimento do personagem com as teclas de seta
     if(KEYS.ArrowRight) hero.style.backgroundPosition = '-220px 0', playerX+=.007*step*speed
     else if(KEYS.ArrowLeft) hero.style.backgroundPosition = '0 0', playerX-=.007*step*speed
     else hero.style.backgroundPosition = '-110px 0'
@@ -470,20 +483,23 @@ const ASSETS = {
     if(inGame && KEYS.ArrowUp) speed = accelerate(speed, accel, step)
     else if(KEYS.ArrowDown) speed = accelerate(speed, breaking, step)
     else speed = accelerate(speed, decel, step)
-  
+    
+    // Se o jogador sair da estrada, desacelera mais rápido
     if(Math.abs(playerX) > 0.55 && speed >= maxOffSpeed) {
       speed = accelerate(speed, offDecel, step)
     }
   
     speed = speed.clamp(0, maxSpeed)
-  
+    
+    // Verifica a seção do mapa atual e atualiza a curva e a altura da estrada
     let current = map[mapIndex]
     let use = current.from < scoreVal && current.to > scoreVal
     if(use) sectionProg += speed*step
     lines[endPos].curve = use ? current.curve(sectionProg) : 0
     lines[endPos].y = use ? current.height(sectionProg) : 0
     lines[endPos].special = null
-  
+    
+    // Quando a seção do mapa é concluída, passa para a próxima
     if(current.to <= scoreVal) {
       mapIndex++
       sectionProg = 0
@@ -504,18 +520,21 @@ const ASSETS = {
       road.style.opacity = .4
       text.innerText = 'Aperte Enter para jogar'
       
+      // Armazena o lap (tempo da corrida) no localStorage
       const savedInput = localStorage.getItem('botaoInicial');
       const volta = lap.innerText;
       const savedLap = localStorage.setItem('lap', volta);
 
       const resultado = localStorage.getItem('lap');
 
+      // Atualiza os recordes de pontuação
       if(localStorage.savedHighscores){
         highscores = JSON.parse(localStorage.getItem('savedHighscores'));
       }
       highscores.push(resultado +`: ${savedInput}` )  
       highscores.sort()
 
+      // Salva os recordes no localStorage
       localStorage.savedHighscores = JSON.stringify(highscores);
       
       updateHighscore()
@@ -527,7 +546,7 @@ const ASSETS = {
       time.innerText = (countDown|0).pad(3)
       score.innerText = (scoreVal|0).pad(8)
       tacho.innerText = speed | 0
-  
+       // Calcula e exibe o tempo da volta (lap)
       let cT = new Date(timestamp() - start)
       lap.innerText = `${cT.getMinutes()}'${cT.getSeconds().pad(2)}"${cT.getMilliseconds().pad(3)}`
   
@@ -536,19 +555,20 @@ const ASSETS = {
   
     
   
-  
+     // Atualiza a posição do fundo
     cloud.style.backgroundPosition = `${ (cloudOffset -= lines[startPos].curve * step * speed * .13) | 0}px 0`
   
     for(let car of cars) {
   
       car.pos = (car.pos + enemy_speed * step) % N
-  
+      
+      // Se o carro chega ao final de um segmento, reposiciona
       if( (car.pos|0) === endPos) {
         if(speed < 30) car.pos = startPos
         else car.pos = endPos - 2
         car.lane = randomProperty(LANE)
       }
-  
+      // Verifica se o jogador colidiu com o carro
       const offsetRatio = 5
       if((car.pos|0) === startPos && isCollide(playerX * offsetRatio + LANE.B, .5, car.lane, .5)) {
         speed = Math.min(hitSpeed, speed)
@@ -556,34 +576,39 @@ const ASSETS = {
       }
   
     }
-  
+    
+     // Desenha a estrada, o fundo e outros elementos gráficos
     let maxy = height
     let camH = H + lines[startPos].y
     let x = 0
     let dx = 0
-  
+    
+     // Desenha cada linha da estrada
     for (let n = startPos; n < startPos + N; n++) {
   
       let l = lines[n % N]
       let level = N * 2 - n
-  
+      
+      // Projeta a estrada na tela com base na posição do jogador
       l.project(playerX * roadW - x, camH, startPos * segL - (n >= N ? N * segL : 0))
       x += dx
       dx += l.curve
-  
+      
       l.clearSprites()
 
       // O que vem depois da '%' é a distância entre cada imagem
 
+      // Desenha os sprites (imagens) do jogo como alienígenas e meteoros
       if(n % 10 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN, -2)
       if(n % 20 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN2, -2)
       if(n % 30 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.METEOR, -2)
       if((n + 5) % 10 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.ALIEN, 1.3)
       if((n + 5) % 20 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.ALIEN3, 1.3)
       if((n + 5) % 30 === 0) l.drawSpriteFloat(level, 0, ASSETS.IMAGE.METEOR, 1.3)
-      
+      // Desenha o efeito especial, se houver
       if(l.special) l.drawSprite(level, 0, l.special, l.special.offset||0)
-  
+      
+      // Desenha os carros inimigos nas linhas
       for(let car of cars) if((car.pos|0) === n % N) l.drawSprite(level, car.element, car.type, car.lane)
   
 
@@ -645,37 +670,6 @@ const ASSETS = {
   function solvingBug() {
 
     location.reload()
-
-    // console.log(pos)
-    // console.log(mapIndex)
-    // console.log(sectionProg)
-    // inGame = false
-
-    // start = timestamp()
-
-    // playerX = 0
-    // speed = 0
-    // scoreVal = 0
-  
-    // pos = 0
-    // cloudOffset = 0
-    // sectionProg = 0
-    // mapIndex = 0
-
-    // console.log(pos)
-    // console.log(mapIndex)
-    // console.log(sectionProg)
-
-    // for(let line of lines) line.curve = line.y = 0
-  
-    // text.innerText = map.length
-    // text.classList.add('blink')
-  
-    // road.style.opacity = .4
-    // hud.style.display = 'none'
-    // home.style.display = 'block'
-    // tacho.style.display = 'block'
-
   }
   //Função que atualiza o placar com os menores tempos de conclusão
   function updateHighscore() {
